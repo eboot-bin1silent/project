@@ -39,7 +39,7 @@ int _main(struct thread *td) {
         params.simultaneous = 1;
         
         // اأدخل هنا الرابط المباشر لملف الـ PKG الخاص بك
-        params.url = "http://192.168.1"; 
+        params.url = "https://archive.org/download/ps4-fpkg-collection-english-j/Journey%20-%20[US]%20[EN]%20[1.01].pkg"; 
         params.name = "My Custom App Installer";
         
         // 4. تسجيل المهمة وإعطاء أمر البدء للنظام
