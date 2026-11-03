@@ -1,0 +1,36 @@
+name: Build PS4 Payload
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y clang make lld
+
+    - name: Download PS4 SDK
+      run: |
+        git clone https://github.com sdk
+        echo "PS4SDK=$GITHUB_WORKSPACE/sdk" >> $GITHUB_ENV
+
+    - name: Compile Payload
+      run: |
+        # نسخ ملف الكود الخاص بك إلى مجلد الـ SDK لتجميعه
+        cp main.c sdk/source/main.c
+        cd sdk
+        make
+        # تغيير اسم الملف الناتج ليكون واضحاً
+        cp payload.bin ../direct_installer.bin
+
+    - name: Upload Finished Payload
+      uses: actions/upload-artifact@v4
+      with:
+        name: PS4-Payload-Bin
+        path: direct_installer.bin
