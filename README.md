@@ -1,1 +1,1 @@
-i know u
+404 Not Found
